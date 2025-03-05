@@ -1,0 +1,128 @@
+// starter.component.scss
+.dashboard-container {
+    padding: 1.5rem;
+  
+    .card {
+      border-radius: 0.5rem;
+      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+      margin-bottom: 1.5rem;
+  
+      .card-body {
+        padding: 1.5rem;
+      }
+    }
+  
+    // Correction du sélecteur legend
+    .chart-legend {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+  
+      .legend-item {
+        display: flex;
+        align-items: center;
+        
+        i {
+          margin-right: 0.5rem;
+          font-size: 0.75rem;
+        }
+      }
+    }
+  
+    // Correction des sélecteurs form-floating
+    .form-floating {
+      position: relative;
+      
+      label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 1rem;
+        pointer-events: none;
+        transform-origin: 0 0;
+        transition: opacity .1s ease-in-out, transform .1s ease-in-out;
+      }
+  
+      input:focus ~ label,
+      input:not(:placeholder-shown) ~ label {
+        transform: scale(.85) translateY(-.5rem);
+        opacity: .65;
+      }
+    }
+  
+    .search-box {
+      max-width: 250px;
+      margin-bottom: 1rem;
+  
+      input {
+        width: 100%;
+        padding: 0.5rem 1rem;
+        border-radius: 0.25rem;
+        border: 1px solid #ced4da;
+      }
+    }
+  
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      text-align: center;
+  
+      .stat-item {
+        padding: 1rem;
+        
+        h4 {
+          margin-bottom: 0.5rem;
+          font-weight: 600;
+        }
+      }
+    }
+  
+    .offers-carousel {
+      margin: 1.5rem 0;
+  
+      .offer-slide {
+        background: linear-gradient(45deg, #2196F3, #3F51B5);
+        color: white;
+        padding: 2rem;
+        text-align: center;
+        border-radius: 0.5rem;
+  
+        h3 {
+          margin: 1rem 0;
+          font-weight: 300;
+        }
+      }
+    }
+  
+    .product-carousel {
+      .product-slide {
+        padding: 1.5rem;
+        text-align: center;
+  
+        img {
+          max-width: 100%;
+          height: auto;
+          margin-bottom: 1rem;
+        }
+  
+        h4 {
+          font-size: 1.1rem;
+          margin-bottom: 0;
+        }
+      }
+    }
+  
+    // Styles pour ngx-datatable
+    .ngx-datatable {
+      .datatable-header {
+        background-color: #f8f9fa;
+      }
+  
+      .datatable-body-row {
+        &:hover {
+          background-color: #f8f9fa;
+        }
+      }
+    }
+  }

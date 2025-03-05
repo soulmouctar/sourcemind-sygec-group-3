@@ -1,0 +1,153 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <!-- <div class="card-header bg-primary">
+                <h4 class="card-title mb-0 text-white">Demande de Congé</h4>
+            </div> -->
+            <div class="card-body">
+                <form class="form" [formGroup]="demandeForm">
+                    <div class="row">
+                        <!-- Informations personnelles -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="code">Code</label>
+                                <input id="code" type="text" class="form-control"  formControlName="code" >
+                                <div *ngIf="demandeForm.get('code')?.invalid && demandeForm.get('code')?.touched"
+                                    class="text-danger">
+                                    <small *ngIf="demandeForm.get('code')?.errors?.['required']">
+                                        Le code est requis
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="beneficiaire_uuid">Interessé</label>
+                                <div class="col-12">
+                                    <select class="form-control"  formControlName="beneficiaire_uuid">
+                                        <option disabled>choisir...</option>
+                                        <option *ngFor="let beneficiaire of dataBeneficiaire" value="{{beneficiaire.uuid}}">{{beneficiaire.libelleBeneficiaire | uppercase }}</option>
+                                    </select>
+                                    <div *ngIf="demandeForm.get('beneficiaire_uuid')?.invalid && demandeForm.get('beneficiaire_uuid')?.touched" class="text-danger">
+                                        Le Beneficiaire est requise.
+                                      </div>
+                                </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="servicee_uuid">Service</label>
+                                <div class="col-12">
+                                    <select class="form-control"  formControlName="servicee_uuid" (change)=" chargerPoste(demandeForm.controls.servicee_uuid.value)">
+                                        <option disabled>choisir...</option>
+                                        <option *ngFor="let service of listService" value="{{service.uuid}}">{{service.libelle | uppercase }}</option>
+                                    </select>
+                                    <div *ngIf="demandeForm.get('servicee_uuid')?.invalid && demandeForm.get('servicee_uuid')?.touched" class="text-danger">
+                                        Le Service est requise.
+                                      </div>
+                                </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="poste_uuid">Poste</label>
+                                <div class="col-12">
+                                    <select class="form-control"  formControlName="poste_uuid">
+                                        <option disabled>choisir...</option>
+                                        <option *ngFor="let poste of listPoste" value="{{poste.uuid}}">{{poste.libelle | uppercase }}</option>
+                                    </select>
+                                    <div *ngIf="demandeForm.get('poste_uuid')?.invalid && demandeForm.get('poste_uuid')?.touched" class="text-danger">
+                                        Le Poste est requise.
+                                      </div>
+                                </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="typeConge_uuid">Type Congé</label>
+                                <div class="col-12">
+                                    <select class="form-control"  formControlName="typeConge_uuid">
+                                        <option disabled>choisir...</option>
+                                        <option *ngFor="let typeConge of dataTypeConge" value="{{typeConge.uuid}}">{{typeConge.libelle | uppercase }}</option>
+                                    </select>
+                                    <div *ngIf="demandeForm.get('typeConge_uuid')?.invalid && demandeForm.get('typeConge_uuid')?.touched" class="text-danger">
+                                        Le Type Congé est requise.
+                                      </div>
+                                </div>
+                        </div>
+
+
+                        <!-- Dates de congé -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="dateDebut">Date de début</label>
+                                <input type="date" class="form-control" id="dateDebut" name="dateDebut" ngModel required
+                                     formControlName="dateDebut">
+                                     <div *ngIf="demandeForm.get('dateDebut')?.invalid && demandeForm.get('dateDebut')?.touched"
+                                     class="text-danger">
+                                     <small *ngIf="demandeForm.get('dateDebut')?.errors?.['required']">
+                                         Le Date Debut est requis
+                                     </small>
+                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="dateFin">Date de fin</label>
+                                <input type="date" class="form-control" id="dateFin" name="dateFin" ngModel required
+                                    formControlName="dateFin">
+                                    <div *ngIf="demandeForm.get('dateFin')?.invalid && demandeForm.get('dateFin')?.touched"
+                                    class="text-danger">
+                                    <small *ngIf="demandeForm.get('dateFin')?.errors?.['required']">
+                                        Le Date Fin est requis
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="nombreJours">Nombre de jour</label>
+                                <input type="number" class="form-control" id="nombreJours" name="nombreJours" ngModel required
+                                     formControlName="nombreJours">
+                                     <div *ngIf="demandeForm.get('nombreJours')?.invalid && demandeForm.get('nombreJours')?.touched"
+                                     class="text-danger">
+                                     <small *ngIf="demandeForm.get('nombreJours')?.errors?.['required']">
+                                         Le nombre de Jours est requis
+                                     </small>
+                                 </div>
+                            </div>
+                        </div>
+                  
+
+                        <!-- Motif -->
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="motif">Motif du congé</label>
+                                <textarea class="form-control" rows="3" id="motif" name="motif" ngModel required
+                     
+                                    placeholder="Veuillez expliquer le motif de votre demande de congé..." formControlName="motif"></textarea>
+                                    <div *ngIf="demandeForm.get('motif')?.invalid && demandeForm.get('motif')?.touched"
+                                    class="text-danger">
+                                    <small *ngIf="demandeForm.get('motif')?.errors?.['required']">
+                                        Le Motif est requis
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Boutons d'action -->
+                    <div class="form-group row mt-4">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-primary btn-raised mr-1" (click)="save()" >
+                                Soumettre la demande
+                            </button>
+                            <button type="button" class="btn btn-light btn-raised">
+                                Annuler
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

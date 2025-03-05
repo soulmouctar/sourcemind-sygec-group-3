@@ -1,0 +1,52 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <!-- <div class="card-header bg-primary">
+                <h4 class="card-title mb-0 text-white">Demande de Congé</h4>
+            </div> -->
+            <form class="form" [formGroup]="adminForm">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input id="email" type="email" class="form-control"  formControlName="email" required>
+                        <div *ngIf="adminForm.get('email')?.invalid && adminForm.get('email')?.touched"
+                            class="text-danger">
+                            <small *ngIf="adminForm.get('email')?.errors?.['required']">
+                                Le email est requis
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- motDePass -->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="motDePass">Mot de Passe</label>
+                        <textarea id="motDePass" type="text" class="form-control"  formControlName="motDePass" required></textarea>
+                        <div *ngIf="adminForm.get('motDePass')?.invalid && adminForm.get('motDePass')?.touched"
+                            class="text-danger">
+                            <small *ngIf="adminForm.get('motDePass')?.errors?.['required']">
+                                Le mot De Passe est requis
+                            </small>
+                        </div>
+                    </div>
+                </div>
+       
+
+        <!-- Boutons d'action -->
+        <div class="form-group row mt-4">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary btn-raised mr-1" (click)="save()"
+                    [disabled]="!adminForm.valid">
+                    Enregistrer
+                </button>
+                <button type="button" class="btn btn-light btn-raised">
+                    Annuler
+                </button>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>

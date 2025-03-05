@@ -1,0 +1,10 @@
+<div class="login" *ngIf="isLoggedIn">
+<router-outlet>
+    <app-spinner></app-spinner>
+</router-outlet>
+</div>
+
+
+<div class="login" *ngIf="!isLoggedIn">
+    <router-outlet></router-outlet> 
+</div>

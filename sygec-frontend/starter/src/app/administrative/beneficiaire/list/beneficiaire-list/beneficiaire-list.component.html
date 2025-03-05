@@ -1,0 +1,205 @@
+<div class="row">
+  <div class="col-12">
+      <div class="card">
+          <div class="card-body">
+            
+<div class="container-fluid">
+  <h5 class="card-title">Beneficiaire</h5>
+  <div class="row mb-3">
+    <div class="col-md-4 col-sm-6 mb-2">
+      <input 
+        class="form-control mr-sm-2" 
+        type="search" 
+        placeholder="Recherche" 
+        [(ngModel)]="searchTerm"
+        (input)="search()"
+        aria-label="Recherche">
+    </div>
+    <div class="col-md-2 col-sm-3 mb-2">
+      <button class="btn btn-primary w-100" (click)="search()">
+        Recherche
+      </button>
+    </div>
+    <div class="col-md-3 col-sm-3 mb-2">
+      <button class="p btn-bi bi-plus-square btn btn-primary w-100" (click)="openModal(modal, null)" data-bs-target="#disablebackdrop">
+        Ajouter
+      </button> 
+    </div>
+  </div>
+      
+    
+    <!-- Table with responsive design -->
+    <div class="table-responsive defiler">
+      <table class="table table-bordered table-striped">
+        <thead class="text-center">
+          <tr>
+              <th>N°</th>
+              <th>Nom</th>
+              <th>Prenom</th>
+              <th>Grade</th>
+              <th>Email</th>
+              <th>Photo</th>
+              <th>Matricule</th>
+              <th>Action</th>
+          </tr>
+        </thead>
+        <tbody class="text-center">
+            <tr *ngFor="let beneficiaire of filteredListDBeneficiaire; let i = index">  
+              <td>{{(page - 1) * pageSize + i + 1}}</td>
+              <td>{{beneficiaire.nom}}</td>
+              <td>{{beneficiaire.prenom}}</td>
+              <td>{{beneficiaire.grade}}</td>
+              <td>
+                <span class="d-inline-block text-truncate" style="max-width: 150px;" title="{{beneficiaire.email}}">
+                  {{beneficiaire.email}}
+                </span>
+              </td>
+              <td>
+                <div class="user-photo-container">
+                  <img *ngIf="beneficiaire.photo" [src]="beneficiaire.photo" alt="Photo de profil" class="user-photo">
+                  <span *ngIf="!beneficiaire.photo" class="user-photo-placeholder">
+                    <i class="bi bi-person-circle"></i>
+                  </span>
+                </div>
+              </td>
+              <td>{{beneficiaire.matricule}}</td>
+              <td>
+                <div class="d-flex flex-wrap justify-content-center gap-1">
+                  <button class="btn btn-sm btn-primary mb-1" title="Modifier" (click)="openModal(modal, beneficiaire)">
+                    <i class="bi bi-pencil"></i>
+                  </button>
+                  <button class="btn btn-sm btn-danger mb-1" title="Supprimer" (click)="delete(beneficiaire)">
+                    <i class="bi bi-x"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+        </tbody>
+      </table>
+
+      <!-- Responsive Pagination -->
+      <div class="row align-items-center mt-3">
+        <div class="col-lg-8 col-md-7 col-sm-12 mb-2">
+          <ngb-pagination
+            [collectionSize]="collectionSize"
+            [(page)]="page"
+            [pageSize]="pageSize"
+            (pageChange)="onPageChange($event)"
+            [maxSize]="5"
+            [boundaryLinks]="true"
+            class="d-flex justify-content-center justify-content-md-start">
+          </ngb-pagination>
+        </div>
+        
+        <div class="col-lg-4 col-md-5 col-sm-12 mb-2 d-flex justify-content-center justify-content-md-end">
+          <select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="applyFilters()">
+            <option value="5">5 items par page</option>
+            <option value="10">10 items par page</option>
+            <option value="15">15 items par page</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <!-- End Table with responsive design -->
+</div>
+    
+<ng-template #modal let-modal>
+  <div class="modal-header bg-primary text-white py-3">
+      <div class="d-flex align-items-center">
+          <i class="mdi mdi-file-document-edit-outline me-2 fs-4"></i>
+          <h5 class="modal-title mb-0" id="editLabel">Beneficiaire</h5>
+      </div>
+      <button type="button" 
+              class="btn-close btn-close-white" 
+              aria-label="Fermer" 
+              (click)="closeModal()">
+      </button>
+  </div>
+
+  <div class="modal-body p-4">
+      <div class="card shadow-sm border-0">
+          <div class="card-header bg-light py-3">
+              <div class="d-flex justify-content-between align-items-center">
+                  <h6 class="mb-0 text-primary">
+                      <i class="mdi mdi-form-select me-2"></i>
+                      Formulaire de Beneficiaire
+                  </h6>
+                  <span class="badge bg-primary">Nouveau</span>
+              </div>
+          </div>
+          
+          <div class="card-body p-4">
+              <app-beneficiaire-form [beneficiairePassed]="beneficiaireParam"></app-beneficiaire-form>
+          </div>
+      </div>
+  </div>
+</ng-template>
+
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Ajoutez ces styles CSS pour améliorer la responsivité et l'affichage des photos -->
+<style>
+/* Styles pour la responsivité générale */
+@media screen and (max-width: 767px) {
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.btn {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+ngb-pagination ::ng-deep ul {
+  flex-wrap: wrap;
+  justify-content: center;
+}
+}
+
+/* Pour améliorer la lisibilité sur petit écran */
+@media screen and (max-width: 576px) {
+.table {
+  font-size: 0.875rem;
+}
+
+.btn-sm {
+  padding: 0.25rem 0.4rem;
+  font-size: 0.75rem;
+}
+}
+
+/* Styles pour les photos d'utilisateurs */
+.user-photo-container {
+width: 40px;
+height: 40px;
+margin: 0 auto;
+overflow: hidden;
+border-radius: 50%;
+background-color: #f0f0f0;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.user-photo {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+.user-photo-placeholder {
+font-size: 1.5rem;
+color: #6c757d;
+}
+
+/* Style pour les emails tronqués */
+.text-truncate {
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+}
+</style>

@@ -1,0 +1,85 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <!-- <div class="card-header bg-primary">
+                <h4 class="card-title mb-0 text-white">Demande de Congé</h4>
+            </div> -->
+            <div class="card-body">
+                <form class="form" [formGroup]="soldeCongeForm">
+                    <div class="row">
+                        <!-- Informations personnelles -->
+
+
+                        <div class="col-md-6">
+                            <label for="beneficiaire_uuid">Interessé</label>
+                                <div class="col-8">
+                                    <select class="form-control"  formControlName="beneficiaire_uuid">
+                                        <option disabled>choisir...</option>
+                                        <option *ngFor="let beneficiaire of dataBeneficiaire" value="{{beneficiaire.uuid}}">{{beneficiaire.libelleBeneficiaire | uppercase }}</option>
+                                    </select>
+                                    <div *ngIf="soldeCongeForm.get('beneficiaire_uuid')?.invalid && soldeCongeForm.get('beneficiaire_uuid')?.touched" class="text-danger">
+                                        Le Beneficiaire est requise.
+                                      </div>
+                                </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="annee">Année</label>
+                                <input id="annee" type="number" class="form-control" formControlName="annee" required>
+                                <div *ngIf="soldeCongeForm.get('annee')?.invalid && soldeCongeForm.get('annee')?.touched"
+                                    class="text-danger">
+                                    <small *ngIf="soldeCongeForm.get('annee')?.errors?.['required']">
+                                        L'année est requise
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+               
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="soldeAnnuel">Solde Annuel</label>
+                                <input id="soldeAnnuel" type="number" class="form-control" formControlName="soldeAnnuel" required>
+                                <div *ngIf="soldeCongeForm.get('soldeAnnuel')?.invalid && soldeCongeForm.get('soldeAnnuel')?.touched"
+                                    class="text-danger">
+                                    <small *ngIf="soldeCongeForm.get('soldeAnnuel')?.errors?.['soldeAnnuel']">
+                                        Le Solde Annuel est requis
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="soldeRestandt">Solde Restandt</label>
+                                <input id="soldeRestandt" type="number" class="form-control" formControlName="soldeRestandt" required>
+                                <div *ngIf="soldeCongeForm.get('soldeRestandt')?.invalid && soldeCongeForm.get('soldeRestandt')?.touched"
+                                    class="text-danger">
+                                    <small *ngIf="soldeCongeForm.get('soldeRestandt')?.errors?.['required']">
+                                        Le Solde Restandt est requis
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+
+                    <!-- Boutons d'action -->
+                    <div class="form-group row mt-4">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-primary btn-raised mr-1" (click)="save()" [disabled]="!soldeCongeForm.valid">
+                                Enregistrer
+                            </button>
+                            <button type="button" class="btn btn-light btn-raised">
+                                Annuler
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

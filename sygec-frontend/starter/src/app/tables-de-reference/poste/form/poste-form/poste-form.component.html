@@ -1,0 +1,68 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <!-- <div class="card-header bg-primary">
+                <h4 class="card-title mb-0 text-white">Demande de Congé</h4>
+            </div> -->
+            <form class="form" [formGroup]="posteForm">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="libelle">libelle</label>
+                        <input id="libelle" type="text" class="form-control" formControlName="libelle" required>
+                        <div *ngIf="posteForm.get('libelle')?.invalid && posteForm.get('libelle')?.touched"
+                            class="text-danger">
+                            <small *ngIf="posteForm.get('libelle')?.errors?.['required']">
+                                Le libelle est requis
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="poste_uuid">Service</label>
+                        <div class="col-8">
+                            <select class="form-control" formControlName="servicee_uuid">
+                                <option disabled>choisir...</option>
+                                <option *ngFor="let service of dataService" value="{{service.uuid}}" class="uppercase">
+                                    {{ service.libelle }}</option>
+                            </select>
+                            <div *ngIf="posteForm.get('servicee_uuid')?.invalid && posteForm.get('servicee_uuid')?.touched"
+                                class="text-danger">
+                                Le service est requise.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" type="text" class="form-control" formControlName="description"
+                            required></textarea>
+                        <div *ngIf="posteForm.get('description')?.invalid && posteForm.get('description')?.touched"
+                            class="text-danger">
+                            <small *ngIf="posteForm.get('description')?.errors?.['required']">
+                                Le description est requis
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Boutons d'action -->
+                <div class="form-group row mt-4">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary btn-raised mr-1" (click)="save()"
+                            [disabled]="!posteForm.valid">
+                            Enregistrer
+                        </button>
+                        <button type="button" class="btn btn-light btn-raised">
+                            Annuler
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>

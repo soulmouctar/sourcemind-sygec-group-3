@@ -1,0 +1,145 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+              
+<div class="container">
+    <h5 class="card-title">Poste</h5>
+    <div class="row mb-3">
+      <div class="col-4">
+        <input 
+          class="form-control mr-sm-2" 
+          type="search" 
+          placeholder="Recherche" 
+          [(ngModel)]="searchTerm"
+          (input)="search()"
+          aria-label="Recherche">
+      </div>
+      <div class="col-2">
+        <button class="btn btn-primary mb-3" (click)="search()">
+          Recherche
+        </button>
+      </div>
+      <div class="col-3">
+        <button  class="p btn-bi bi-plus-square btn btn-primary mb-3" (click)="openModal(modal, null)" data-bs-target="#disablebackdrop">
+          Ajouter
+        </button> 
+    </div>
+    </div>
+        
+      
+      <!-- Table with stripped rows -->
+      <div class="defiler">
+        <table class="table table-bordered">
+          <thead class="text-center">
+            <tr>
+              <th scope="col-4">N°</th>
+              <th scope="col-4">Libelle</th>
+              <th scope="col-4">Description</th>
+              <th scope="col-4">Service</th>
+              <th scope="col-4">Action</th>
+            </tr>
+          </thead>
+          <tbody class="text-center">
+          <!-- <tr *ngFor="let detailDemande of listDetailDemande ; let i = index">
+              <td>{{i+1}}</td>
+          --> 
+              <tr *ngFor="let poste of filteredListDPoste; let i = index">  
+                <td>{{(page - 1) * pageSize + i + 1}}</td>
+              <td>{{poste.libelle}}</td>
+              <td>{{poste.description}}</td>
+              <td>{{poste.libelleService}}</td>
+              <td>
+                <button class="btn btn-primary" (click)="openModal(modal, poste)">
+                  <i class="fa fa-pencil"></i>
+                </button>
+                <button class="btn btn-danger" (click)="delete(poste)">
+                    <i class="fa fa-times"></i>
+                  </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+  
+        <!-- Pagination -->
+       <div class="d-flex justify-content-between p-2">
+        <ngb-pagination
+          [collectionSize]="collectionSize"
+          [(page)]="page"
+          [pageSize]="pageSize"
+          (pageChange)="onPageChange($event)"
+          [maxSize]="5"
+          [boundaryLinks]="true"
+          class="d-flex justify-content-center">
+        </ngb-pagination>
+        
+        <select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="applyFilters()">
+          <option value="5">5 items per page</option>
+          <option value="10">10 items per page</option>
+          <option value="15">15 items per page</option>
+        </select>
+      </div>
+    </div>
+    
+      <!-- End Table with stripped rows -->
+  </div>
+      
+      
+  
+  
+  
+  <!-- <ng-template #modal let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="editLabel">Demandes Beneficiaires</h5>
+        <button  type="button" class="btn btn-danger close mdi mdi-close"  (click)="closeModal()"><i class="bi bi-x"></i></button>
+    </div>
+    <div class="modal-body mb-2">
+        <div class="card">
+            <div class="card-body pd-2">
+                <app-demande-form></app-demande-form>
+            </div>
+        </div>
+    </div>
+  </ng-template> -->
+
+  <ng-template #modal let-modal>
+    <div class="modal-header bg-primary text-white py-3">
+        <div class="d-flex align-items-center">
+            <i class="mdi mdi-file-document-edit-outline me-2 fs-4"></i>
+            <h5 class="modal-title mb-0" id="editLabel">Poste</h5>
+        </div>
+        <button type="button" 
+                class="btn-close btn-close-white" 
+                aria-label="Fermer" 
+                (click)="closeModal()">
+        </button>
+    </div>
+
+    <div class="modal-body p-4">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-light py-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h6 class="mb-0 text-primary">
+                        <i class="mdi mdi-form-select me-2"></i>
+                        Formulaire de Poste
+                    </h6>
+                    <span class="badge bg-primary">Nouveau</span>
+                </div>
+            </div>
+            
+            <div class="card-body p-4">
+                <app-poste-form [postePassed]="posteParam"></app-poste-form>
+            </div>
+        </div>
+    </div>
+
+
+</ng-template>
+  
+  
+  
+  
+            </div>
+        </div>
+    </div>
+</div>

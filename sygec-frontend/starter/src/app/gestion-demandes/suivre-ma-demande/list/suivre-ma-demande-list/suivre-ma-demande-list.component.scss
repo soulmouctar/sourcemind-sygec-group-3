@@ -1,0 +1,49 @@
+/* Styles de base pour les boutons */
+.btn {
+    padding: 0.5em 1em;
+    font-size: 0.9em;
+    border-radius: 0.25em;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    border: none;
+    cursor: default; /* Pour indiquer que ce n'est pas cliquable */
+  }
+  
+  /* Effet au survol (optionnel) */
+  .btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+  
+  /* Couleurs spécifiques pour chaque statut */
+  .btn-primary {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .btn-warning {
+    background-color: #ce9e0b;
+    color: black;
+  }
+  
+  .btn-danger {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  /* Icônes */
+  .btn i {
+    font-size: 1em;
+  }
+
+  /* Ombre portée */
+.btn {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Effet au survol */
+  .btn:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }

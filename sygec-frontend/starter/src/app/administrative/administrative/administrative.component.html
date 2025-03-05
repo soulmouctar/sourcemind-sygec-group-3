@@ -1,0 +1,150 @@
+<main id="main" class="main">
+    <div class="card">
+        <div class="card-body">
+            <!-- Nav tabs responsive -->
+            <div class="nav-tabs-wrapper">
+                <ul ngbNav #nav="ngbNav" class="nav-tabs nav-fill flex-column flex-sm-row">
+                    <li [ngbNavItem]="1" [disabled]="unActive" class="flex-sm-fill text-sm-center">
+                        <a ngbNavLink class="nav-link d-flex align-items-center justify-content-center">
+                            <i class="fa fa-user-shield me-2 d-none d-sm-inline"></i>
+                            Admin
+                        </a>
+                        <ng-template ngbNavContent>
+                            <app-admin-list></app-admin-list>
+                        </ng-template>
+                    </li>
+                    <li [ngbNavItem]="2" [disabled]="unActive" class="flex-sm-fill text-sm-center">
+                        <a ngbNavLink class="nav-link d-flex align-items-center justify-content-center">
+                            <i class="fa fa-users me-2 d-none d-sm-inline"></i>
+                            Utilisateur
+                        </a>
+                        <ng-template ngbNavContent>
+                            <app-beneficiaire-list></app-beneficiaire-list>
+                        </ng-template>
+                    </li>
+                    <li [ngbNavItem]="3" [disabled]="unActive" class="flex-sm-fill text-sm-center">
+                        <a ngbNavLink class="nav-link d-flex align-items-center justify-content-center">
+                            <i class="fa fa-cogs me-2 d-none d-sm-inline"></i>
+                            <span class="d-none d-md-inline">Parametre Configuration</span>
+                            <span class="d-md-none">Paramètres</span>
+                            <span class="d-none d-sm-inline">Congé</span>
+                        </a>
+                        <ng-template ngbNavContent>
+                            <app-parametre-config></app-parametre-config>
+                        </ng-template>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Tab content with responsive padding -->
+            <div class="tab-content-wrapper mt-3">
+                <div [ngbNavOutlet]="nav" class="p-2 p-md-3"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Ajoutez ces styles CSS pour améliorer la responsivité des onglets -->
+<style>
+/* Styles pour les onglets responsive */
+.nav-tabs .nav-link {
+    padding: 0.75rem 1rem;
+    border-radius: 0;
+    transition: all 0.3s ease;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: #f8f9fa;
+    border-color: #dee2e6 #dee2e6 #fff;
+    font-weight: 600;
+}
+
+/* Adaptations mobiles */
+@media screen and (max-width: 576px) {
+    .nav-tabs .nav-link {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.9rem;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .tab-content-wrapper {
+        margin-top: 1rem;
+    }
+}
+
+/* Effet de survol */
+.nav-tabs .nav-link:hover:not(.active):not([disabled]) {
+    background-color: rgba(13, 110, 253, 0.05);
+    border-color: #e9ecef #e9ecef #dee2e6;
+}
+
+/* Style pour onglet désactivé */
+.nav-tabs .nav-link[disabled] {
+    color: #6c757d;
+    background-color: #f8f9fa;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Animation de transition */
+.tab-content-wrapper {
+    transition: opacity 0.3s ease;
+}
+
+.nav-tabs-wrapper {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+    position: relative;
+}
+
+/* Indicateur de défilement pour les petits écrans */
+@media screen and (max-width: 767px) {
+    .nav-tabs-wrapper::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 20px;
+        background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.7));
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    .nav-tabs-wrapper:not(.scroll-end)::after {
+        opacity: 1;
+    }
+}
+</style>
+
+<!-- Script optionnel pour améliorer l'expérience utilisateur -->
+<script>
+// Ajoutez ce script dans votre composant Angular
+// pour gérer l'indicateur de défilement sur les petits écrans
+ngAfterViewInit() {
+  const tabsWrapper = document.querySelector('.nav-tabs-wrapper');
+  if (tabsWrapper) {
+    const checkScroll = () => {
+      const isScrollable = tabsWrapper.scrollWidth > tabsWrapper.clientWidth;
+      const isScrollEnd = tabsWrapper.scrollLeft + tabsWrapper.clientWidth >= tabsWrapper.scrollWidth - 5;
+      
+      if (isScrollable && !isScrollEnd) {
+        tabsWrapper.classList.remove('scroll-end');
+      } else {
+        tabsWrapper.classList.add('scroll-end');
+      }
+    };
+    
+    // Vérifier au chargement et au redimensionnement
+    checkScroll();
+    tabsWrapper.addEventListener('scroll', checkScroll);
+    window.addEventListener('resize', checkScroll);
+  }
+}
+</script>

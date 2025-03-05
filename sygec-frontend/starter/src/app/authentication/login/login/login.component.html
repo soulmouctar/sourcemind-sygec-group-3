@@ -1,0 +1,105 @@
+<div class="login-register" style="background-image: url(assets/images/background/login-register.jpg); background-size: cover; background-position: center;">
+    <div class="login-box card shadow-lg">
+        <div class="card-header  text-white text-center py-3">
+            <h3 class="m-0 font-weight-bold">CONNEXION</h3>
+        </div>
+        <div class="card-body p-4">
+            <form [formGroup]="loginForm" class="form-horizontal" id="loginform">
+                <div class="form-group mb-4">
+                    <label class="text-muted small mb-2">Adresse e-mail</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-light"><i class="mdi mdi-email text-primary"></i></span>
+                        </div>
+                        <input type="email" placeholder="Saisissez votre mail" formControlName="username"
+                            class="form-control border-left-0" />
+                    </div>
+                    <div *ngIf="loginForm.get('username').touched && loginForm.get('username').invalid" 
+                         class="text-danger small mt-1">Veuillez saisir une adresse e-mail valide</div>
+                </div>
+                
+                <div class="form-group mb-4">
+                    <label class="text-muted small mb-2">Mot de passe</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-light"><i class="mdi mdi-lock text-primary"></i></span>
+                        </div>
+                        <input type="password" id="password" placeholder="Saisissez votre mot de passe"
+                            formControlName="password" class="form-control border-left-0" />
+                    </div>
+                    <div *ngIf="loginForm.get('password').touched && loginForm.get('password').invalid" 
+                         class="text-danger small mt-1">Mot de passe requis</div>
+                </div>
+
+                <div class="form-group text-center mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block py-2 rounded-pill" 
+                            [disabled]="loginForm.invalid || isLoading" 
+                            (click)="openModal(modal)">
+                        <i *ngIf="isLoading" class="mdi mdi-loading mdi-spin mr-2"></i>
+                        {{ isLoading ? 'Connexion en cours...' : 'Se connecter' }}
+                    </button>
+                </div>
+                
+                <div *ngIf="errorMessage" class="alert alert-danger mt-3 mb-0 rounded-pill text-center">
+                    <i class="mdi mdi-alert-circle mr-2"></i> {{ errorMessage }}
+                </div>
+                
+                <!-- <div class="text-center mt-3">
+                    <a href="#" class="text-primary small">Mot de passe oublié?</a>
+                </div> -->
+            </form>
+        </div>
+    </div>
+</div>
+
+<ng-template #modal let-modal>
+    <!-- <div class="modal-header">
+        <h5 class="modal-title" id="editLabel">Modification de mot de passe</h5>
+        <button type="button" class="btn btn-danger close mdi mdi-close"  (click)="closeModal()"><i class="bi bi-x"></i></button>
+    </div> -->
+    <div class="modal-body mb-2">
+      <div class="card-body pd-2 p-2">
+        <form [formGroup]="loginForm" (ngSubmit)="onChangePassword()">
+          <div class="alert alert-primary d-flex align-items-center" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
+            <div>
+              soyez attentif pendant la modification de votre mot de passe !!!
+            </div>
+          </div>
+         
+  
+          <div class="form-outline mb-4 row">
+  
+            <div class="col-lg-4">
+              <label class="form-label" for="form3Example4">Email</label>
+            </div>
+            <div class="col-lg-8">
+              <input type="username"  placeholder="Saisissez votre mail" formControlName="username" value="votre mail"
+                class="form-control" />
+            </div>
+          </div>
+  
+  
+          <div class="form-outline mb-4 row">
+            <div class="col-lg-4">
+              <label class="form-label" for="form3Example4">Mot de passe</label>
+            </div>
+            <div class="col-lg-8">
+              <input type="password" id="password" placeholder="Saisissez votre mot de passe" formControlName="password"
+              value="123456" class="form-control" />
+            </div>
+          </div>
+  
+  
+          <div>
+            <button type="submit" class="btn btn-primary btn-block col-lg-12" (submit)="onChangePassword()">
+              changer et se connecter
+            </button>
+          </div>
+          <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{ error }}</div>
+  
+        </form>
+  
+      </div>
+    </div>
+  </ng-template>

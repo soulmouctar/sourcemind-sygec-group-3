@@ -1,0 +1,74 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <!-- <div class="card-header bg-primary">
+                <h4 class="card-title mb-0 text-white">Demande de Congé</h4>
+            </div> -->
+            <div class="card-body">
+                <form class="form" [formGroup]="typeCongeForm">
+                    <div class="row">
+                        <!-- Informations personnelles -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="libelle">libelle</label>
+                                <input id="libelle" type="text" class="form-control" formControlName="libelle" required>
+                                <div *ngIf="typeCongeForm.get('libelle')?.invalid && typeCongeForm.get('libelle')?.touched"
+                                    class="text-danger">
+                                    <small *ngIf="typeCongeForm.get('libelle')?.errors?.['required']">
+                                        Le libelle est requis
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="beneficiaire_uuid">Deductible</label>
+                            <div class="col-8">
+                                <select class="form-control" formControlName="deductible">
+                                    <option value="" disabled>choisir...</option>
+                                    <option value="true">OUI</option>
+                                    <option value="false">NON</option>
+                                </select>
+                                <div *ngIf="typeCongeForm.get('deductible')?.invalid && typeCongeForm.get('deductible')?.touched"
+                                    class="text-danger">
+                                    <small *ngIf="typeCongeForm.get('deductible')?.errors?.['required']">
+                                        Le deductible est requis
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea id="description" type="text" class="form-control"
+                                    formControlName="description" required></textarea>
+                                <div *ngIf="typeCongeForm.get('description')?.invalid && typeCongeForm.get('description')?.touched"
+                                    class="text-danger">
+                                    <small *ngIf="typeCongeForm.get('description')?.errors?.['required']">
+                                        La description est requis
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <!-- Boutons d'action -->
+                    <div class="form-group row mt-4">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-primary btn-raised mr-1" (click)="save()"
+                                [disabled]="!typeCongeForm.valid">
+                                Enregistrer
+                            </button>
+                            <button type="button" class="btn btn-light btn-raised">
+                                Annuler
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

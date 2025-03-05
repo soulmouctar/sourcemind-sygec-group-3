@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <!-- <div class="card-header bg-primary">
+                <h4 class="card-title mb-0 text-white">Demande de Congé</h4>
+            </div> -->
+            <div class="card-body">
+                <form class="form" [formGroup]="serviceForm">
+                    <div class="row">
+                        <!-- Informations personnelles -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="libelle">Libelle</label>
+                                <input id="libelle" type="text" class="form-control" formControlName="libelle" required>
+                                <div *ngIf="serviceForm.get('libelle')?.invalid && serviceForm.get('libelle')?.touched"
+                                    class="text-danger">
+                                    <small *ngIf="serviceForm.get('libelle')?.errors?.['required']">
+                                        Le libelle est requis
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea id="description" type="text" class="form-control"
+                                    formControlName="description" required></textarea>
+                                <div *ngIf="serviceForm.get('description')?.invalid && serviceForm.get('description')?.touched"
+                                    class="text-danger">
+                                    <small *ngIf="serviceForm.get('description')?.errors?.['required']">
+                                        Le description est requis
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Boutons d'action -->
+                    <div class="form-group row mt-4">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-primary btn-raised mr-1" (click)="save()"
+                                [disabled]="!serviceForm.valid">
+                               Enregistrer
+                            </button>
+                            <button type="button" class="btn btn-light btn-raised">
+                                Annuler
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

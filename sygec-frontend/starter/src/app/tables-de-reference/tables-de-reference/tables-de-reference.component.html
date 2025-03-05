@@ -1,0 +1,37 @@
+<main id="main" class="main">
+
+    <div class="card">
+        <ul ngbNav #nav="ngbNav" class="nav-tabs">
+            <li [ngbNavItem]="1" [disabled]="unActive">
+                <a ngbNavLink>Service</a>
+                <ng-template ngbNavContent>
+                    <app-service-list></app-service-list>
+                </ng-template>
+            </li>
+            <li [ngbNavItem]="2" [disabled]="unActive">
+                <a ngbNavLink>Poste</a>
+                <ng-template ngbNavContent>
+                    <app-poste-list></app-poste-list>
+                </ng-template>
+            </li>
+
+            <li [ngbNavItem]="3">
+                <a ngbNavLink>Type Congé</a>
+                <ng-template ngbNavContent>
+                    <app-type-conge-list></app-type-conge-list>
+                </ng-template>
+            </li>
+
+            <li [ngbNavItem]="4">
+                <a ngbNavLink>Solde Congé</a>
+                <ng-template ngbNavContent>
+                    <app-solde-conge-list></app-solde-conge-list>
+                </ng-template>
+            </li>
+            
+        </ul>
+        
+        <div [ngbNavOutlet]="nav" class="mt-2"></div>
+ </div>
+    
+</main>

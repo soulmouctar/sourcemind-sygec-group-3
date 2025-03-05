@@ -1,0 +1,116 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <!-- <div class="card-header bg-primary">
+                <h4 class="card-title mb-0 text-white">Demande de Congé</h4>
+            </div> -->
+            <form class="form" [formGroup]="beneficiaireForm">
+                <div class="row mb-2">
+                    <label class="col-form-label col-4" for="service_uuid">Service </label>
+                        <div class="col-8">
+                            <select class="form-control"  formControlName="service_uuid">
+                                <option disabled>choisir...</option>
+                                <option *ngFor="let service of dataService" value="{{service.uuid}}">{{service.libelle | uppercase }}</option>
+                            </select>
+                            <div *ngIf="beneficiaireForm.get('service_uuid')?.invalid && beneficiaireForm.get('service_uuid')?.touched" class="text-danger">
+                                Le Service est requise.
+                              </div>
+                        </div>
+                </div>
+            
+                <div class="row mb-2">
+                    <label class="col-form-label col-4" for="prenom">Prénom </label>
+                    <div class="col-8">
+                        <input type="text" class="form-control" id="prenom" name="prenom" formControlName="prenom" />
+                    </div>
+                    <div *ngIf="beneficiaireForm.get('prenom')?.invalid && beneficiaireForm.get('prenom')?.touched" class="text-danger">
+                        Le prenom est requise.
+                      </div>
+                </div>
+                <div class="row mb-2">
+                    <label class="col-form-label col-4" for="nom">Nom </label>
+                    <div class="col-8">
+                        <input type="text" class="form-control" id="nom" name="nom" formControlName="nom"/>
+                    </div>
+                    <div *ngIf="beneficiaireForm.get('nom')?.invalid && beneficiaireForm.get('nom')?.touched" class="text-danger">
+                        Le nom est requise.
+                      </div>
+                </div>
+                <div class="row mb-2">
+                    <label class="col-form-label col-4" for="grade">Grade/Hierarchie </label>
+                    <div class="col-8">
+                        <input type="text" class="form-control" id="grade" name="grade" formControlName="grade" />
+                    </div>
+                    <div *ngIf="beneficiaireForm.get('grade')?.invalid && beneficiaireForm.get('grade')?.touched" class="text-danger">
+                        Le grade est requise.
+                      </div>
+                </div>
+                <div class="row mb-2">
+                    <label class="col-form-label col-4" for="email">Email </label>
+                    <div class="col-8">
+                        <input type="email" class="form-control" id="email" name="email" formControlName="email" />
+                    </div>
+                    <div *ngIf="beneficiaireForm.get('email')?.invalid && beneficiaireForm.get('email')?.touched" class="text-danger">
+                        L'email est requise.
+                      </div>
+                </div>
+                <div class="row mb-2">
+                    <label class="col-form-label col-4" for="email">Phone </label>
+                    <div class="col-8">
+                        <input type="text" class="form-control" id="phone" name="phone" formControlName="phone" />
+                    </div>
+                    <div *ngIf="beneficiaireForm.get('phone')?.invalid && beneficiaireForm.get('phone')?.touched" class="text-danger">
+                        Le phone est requise.
+                      </div>
+                </div>
+                <div class="row mb-2">
+                    <label class="col-form-label col-4" for="email">Matricule </label>
+                    <div class="col-8">
+                        <input type="text" class="form-control" id="matricule" name="matricule" formControlName="matricule" />
+                    </div>
+                    <div *ngIf="beneficiaireForm.get('matricule')?.invalid && beneficiaireForm.get('matricule')?.touched" class="text-danger">
+                        Le matricule est requis.
+                      </div>
+                </div>
+                <div class="row mb-2">
+                    <label class="col-form-label col-4" for="service_uuid">Role </label>
+                        <div class="col-8">
+                            <select class="form-control"  formControlName="role">
+                                <option disabled>choisir...</option>
+                                <option  value="DG">DG</option>
+                                <option  value="DGA">DGA</option>
+                                <option  value="CHEF_SERVICE">CHEF_SERVICE</option>
+                                <option  value="BENEFICIAIRE">BENEFICIAIRE</option>
+                                <option  value="MAGASIN">MAGASIN</option>
+                            </select>
+                            <div *ngIf="beneficiaireForm.get('role')?.invalid && beneficiaireForm.get('role')?.touched" class="text-danger">
+                                Le role est requise.
+                              </div>
+                        </div>
+                </div>
+                <div class="row mb-2">
+                    <label class="col-form-label col-4" for="imgArcticle">Photo </label>
+                    <div class="col-8">
+                        <input type="file" class="form-control" id="imgArcticle" name="imgArcticle" formControlName="imgArcticle" (change)="upLoadFile($event)"  accept="image/*" >
+                    </div>
+                    <div *ngIf="beneficiaireForm.get('imgArcticle')?.invalid && beneficiaireForm.get('imgArcticle')?.touched" class="text-danger">
+                        La photo est requise.
+                      </div>
+                </div>
+       
+
+        <!-- Boutons d'action -->
+        <div class="form-group row mt-4">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary btn-raised mr-1" (click)="save()"
+                    [disabled]="!beneficiaireForm.valid">
+                    Enregistrer
+                </button>
+                <button type="button" class="btn btn-light btn-raised">
+                    Annuler
+                </button>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
